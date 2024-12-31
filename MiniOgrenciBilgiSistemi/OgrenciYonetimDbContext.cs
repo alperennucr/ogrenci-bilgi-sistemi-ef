@@ -19,7 +19,7 @@ namespace MiniOgrenciBilgiSistemi
         {
             base.OnConfiguring(optionsBuilder);
 
-            optionsBuilder.UseSqlServer(@"Data Source = .\SQLEXPRESS; Initial Catalog = OgrenciBilgiSistemi; Integrated Security = true; TrustServerCertificate = true;");
+            optionsBuilder.UseSqlServer(@"Data Source = .; Initial Catalog = OgrenciBilgiSistemi; Integrated Security = true; TrustServerCertificate = true;");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

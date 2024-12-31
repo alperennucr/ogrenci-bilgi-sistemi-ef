@@ -155,10 +155,13 @@ namespace MiniOgrenciBilgiSistemi
             using (var ctx = new OgrenciYonetimDbContext())
             {
 
-                ctx.Siniflar.ToList().ForEach(e =>
-                {
-                    cmbBox_ogrSinif.Items.Add(e);
-                });
+                    ctx.Siniflar.ToList().ForEach(e =>
+                    {
+                        if(e != null)
+                        {
+                            cmbBox_ogrSinif.Items.Add(e);
+                        }
+                    });
 
             }
         }
@@ -206,9 +209,17 @@ namespace MiniOgrenciBilgiSistemi
 
         private void btn_sinifBul_Click(object sender, EventArgs e)
         {
-            using(var ctx = new OgrenciYonetimDbContext())
-            {
-                
+            if (txtBox_sinifAd.Text != string.Empty) {
+                using (var ctx = new OgrenciYonetimDbContext())
+                {
+                    var siniflar = ctx.Siniflar.Where(s => s.SinifAd == txtBox_sinifAd.Text).ToList();
+                    if (siniflar.Count > 0)
+                    {
+                        Sinif sinif = siniflar[0];
+                        txtBox_sinifAd.Text = sinif.SinifAd;
+                        numUpD_sinifKontenjan.Value = sinif.Kontenjan;
+                    }
+                }
             }
         }
     }
